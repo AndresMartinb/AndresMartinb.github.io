@@ -1,0 +1,317 @@
+/* ---------- Tipografías alojadas en el sitio (cargan rápido aunque el wifi sea lento) ---------- */
+@font-face { font-family: "Bodoni Moda"; src: url("assets/fonts/bodoni-moda-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Hanken Grotesk"; src: url("assets/fonts/hanken-grotesk-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Hanken Grotesk"; src: url("assets/fonts/hanken-grotesk-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Hanken Grotesk"; src: url("assets/fonts/hanken-grotesk-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+
+/* ---------- Tokens ---------- */
+:root {
+  --fondo: #140B0F;          /* café-vino profundo */
+  --superficie: rgba(30, 18, 23, 0.74);
+  --crema: #F3E6CF;          /* nombre */
+  --texto: #EFE6DA;
+  --gris: #BBAA9F;
+  --cobre: #D49A6A;
+  --cobre-claro: #ECC39A;
+  --borde: rgba(212, 154, 106, 0.30);
+  --vino: #7A1C2B;
+  --vino-claro: #A3283A;
+  --verde-whatsapp: #25D366;
+
+  --serif: "Bodoni Moda", "Bodoni 72", Didot, Georgia, serif;
+  --sans: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; background: var(--fondo); }
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: var(--sans);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+img, svg { display: block; }
+h1, h2, p, figure { margin: 0; }
+ul { margin: 0; padding: 0; list-style: none; }
+
+/* ---------- Fondo corporativo ---------- */
+.fondo {
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    linear-gradient(180deg, rgba(20, 11, 15, 0) 0%, rgba(20, 11, 15, 0.25) 26%, rgba(20, 11, 15, 0.82) 44%, var(--fondo) 60%),
+    linear-gradient(90deg, rgba(20, 11, 15, 0.5) 0%, rgba(20, 11, 15, 0) 55%),
+    url("assets/fondo-corporativo.svg") 72% 0 / cover no-repeat,
+    var(--fondo);
+}
+
+/* ---------- Tarjeta ---------- */
+.tarjeta {
+  position: relative; z-index: 1;
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
+  padding:
+    calc(26px + env(safe-area-inset-top))
+    calc(18px + env(safe-area-inset-right))
+    calc(36px + env(safe-area-inset-bottom))
+    calc(18px + env(safe-area-inset-left));
+}
+
+/* Foto + panel */
+.cabecera {
+  display: grid;
+  grid-template-columns: 44% 1fr;
+  align-items: center;
+}
+.retrato {
+  position: relative;
+  aspect-ratio: 9 / 10;
+  border-radius: 44%;
+  padding: 2px;
+  isolation: isolate;
+  box-shadow: 0 0 34px -6px rgba(236, 195, 154, 0.35), 0 26px 50px -18px rgba(0, 0, 0, 0.8);
+}
+.retrato-borde {
+  position: absolute; inset: 0; z-index: -1;
+  border-radius: inherit;
+  background: conic-gradient(from var(--giro, 0deg), #8C5A3A, var(--cobre-claro), #8C5A3A 30%, #5E3A28 50%, var(--cobre) 70%, #FFE2C2 78%, #8C5A3A 86%);
+}
+.retrato img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: 50% 20%;
+  border-radius: 44%;
+  background: #2A1A1C;
+}
+
+.panel {
+  position: relative; z-index: 2;
+  margin-left: -14px;
+  padding: 14px 11px 12px 13px;
+  border: 1px solid var(--borde);
+  border-radius: 18px;
+  background: linear-gradient(160deg, rgba(48, 30, 34, 0.78), rgba(24, 14, 18, 0.82));
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.9);
+  container-type: inline-size;
+}
+.panel-titulo {
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.3;
+  color: var(--texto);
+}
+.panel-sub {
+  margin-top: 6px;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cobre);
+}
+.ejes {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+}
+.ejes li {
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+  font-size: 0.6rem;
+  letter-spacing: -0.005em;
+  color: var(--gris);
+  text-align: center;
+}
+.eje-icono {
+  display: grid; place-items: center;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 154, 106, 0.55);
+  background: radial-gradient(circle at 50% 30%, rgba(212, 154, 106, 0.16), rgba(212, 154, 106, 0.02));
+}
+.eje-icono svg {
+  width: 19px; height: 19px;
+  fill: none; stroke: var(--cobre-claro); stroke-width: 1.4;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.eje-icono .lleno { fill: var(--cobre-claro); }
+.eje-icono text {
+  fill: var(--cobre-claro); stroke: none;
+  font: 600 5.6px var(--sans);
+  letter-spacing: 0.02em;
+}
+/* Panel muy angosto: íconos en dos filas */
+@container (max-width: 150px) {
+  .ejes { grid-template-columns: repeat(2, 1fr); row-gap: 10px; }
+}
+
+@media (max-width: 380px) {
+  .panel { padding: 12px 9px 11px 11px; }
+  .panel-titulo { font-size: 0.9375rem; }
+  .panel-sub { font-size: 0.5625rem; letter-spacing: 0.16em; }
+  .ejes { gap: 2px; }
+  .ejes li { font-size: 0.55rem; }
+  .eje-icono { width: 30px; height: 30px; }
+  .eje-icono svg { width: 17px; height: 17px; }
+}
+
+/* Nombre y título */
+.nombre {
+  margin-top: 30px;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(2.5rem, 12.6vw, 3.6rem);
+  line-height: 1.02;
+  letter-spacing: -0.012em;
+  color: var(--crema);
+}
+.regla {
+  display: block;
+  width: 62px; height: 2px;
+  margin-top: 20px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--cobre), rgba(212, 154, 106, 0.2));
+}
+.titulo {
+  margin-top: 18px;
+  max-width: 36ch;
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--texto);
+  text-wrap: balance;
+}
+
+/* ---------- Botones ---------- */
+.acciones {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.boton {
+  position: relative;
+  display: flex; align-items: center; gap: 10px;
+  min-height: 60px;
+  padding: 10px 14px;
+  border: 1px solid var(--borde);
+  border-radius: 16px;
+  background: var(--superficie);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color: var(--texto);
+  font-weight: 500;
+  font-size: clamp(0.8rem, 3.55vw, 1rem);
+  line-height: 1.2;
+  text-decoration: none;
+  transition: border-color .2s ease, background-color .2s ease, transform .12s ease;
+}
+.boton > svg {
+  flex: none;
+  width: 22px; height: 22px;
+  fill: none; stroke: var(--cobre); stroke-width: 1.5;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.boton:hover { border-color: rgba(236, 195, 154, 0.65); }
+.boton:active { transform: scale(.975); }
+.boton:focus-visible { outline: 2px solid var(--cobre-claro); outline-offset: 3px; }
+.boton[hidden] { display: none; }
+.boton-ancho { grid-column: 1 / -1; justify-content: center; }
+.boton > span { white-space: nowrap; }
+
+.boton-whatsapp {
+  grid-column: 1 / -1;
+  min-height: 68px;
+  padding: 10px 46px;
+  justify-content: center;
+  gap: 14px;
+  overflow: hidden;
+  border-color: rgba(232, 104, 122, 0.55);
+  background:
+    radial-gradient(120% 140% at 50% -30%, rgba(255, 255, 255, 0.10), transparent 55%),
+    linear-gradient(180deg, #8E1F31 0%, #6E1626 55%, #5A101F 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), inset 0 -1px 0 rgba(0, 0, 0, 0.25), 0 18px 34px -16px rgba(142, 31, 49, 0.8);
+  color: #fff;
+  font-weight: 500;
+  font-size: clamp(1rem, 4.6vw, 1.1875rem);
+  letter-spacing: 0.005em;
+}
+.boton-whatsapp:hover { border-color: rgba(245, 140, 155, 0.8); }
+.logo-whatsapp { flex: none; display: block; }
+.logo-whatsapp svg { width: 30px; height: 30px; fill: #fff; }
+.boton-whatsapp .flecha {
+  position: absolute; right: 18px; top: 50%;
+  width: 22px; height: 22px;
+  margin-top: -11px;
+  fill: none; stroke: rgba(255, 255, 255, 0.9); stroke-width: 2;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+/* Destello lento sobre el botón principal */
+.boton-whatsapp::after {
+  content: "";
+  position: absolute; top: 0; bottom: 0; left: -40%;
+  width: 34%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+  transform: skewX(-18deg) translateX(0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---------- QR al final ---------- */
+.qr-bloque { margin-top: 46px; text-align: center; }
+.regla-centro { margin: 0 auto 22px; background: linear-gradient(90deg, rgba(212,154,106,.15), var(--cobre), rgba(212,154,106,.15)); }
+.qr-bloque h2 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.375rem;
+  line-height: 1.25;
+  color: var(--crema);
+}
+.qr {
+  width: min(220px, 62vw);
+  margin: 18px auto 0;
+  padding: 12px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--borde), 0 0 0 6px rgba(212, 154, 106, 0.08), 0 24px 50px -24px rgba(0, 0, 0, 0.9);
+}
+.qr img { width: 100%; height: auto; }
+.direccion { margin-top: 14px; font-size: 0.9375rem; color: var(--gris); }
+
+/* ---------- Pantallas grandes ---------- */
+@media (min-width: 700px) {
+  .tarjeta { padding-top: 56px; padding-bottom: 64px; }
+  .nombre { font-size: 3.6rem; }
+}
+
+/* ---------- Microanimaciones (una sola secuencia de entrada) ---------- */
+@property --giro { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+
+.listo .retrato-borde { animation: girar 9s linear infinite; }
+@keyframes girar { to { --giro: 360deg; } }
+
+.listo .boton-whatsapp::after { animation: destello 7s ease-in-out 2.2s infinite; }
+@keyframes destello {
+  0% { opacity: 0; transform: skewX(-18deg) translateX(0); }
+  8% { opacity: 1; }
+  22%, 100% { opacity: 0; transform: skewX(-18deg) translateX(460%); }
+}
+
+.entra { opacity: 0; transform: translateY(12px); }
+.retrato.entra { transform: scale(.96); }
+.panel.entra { transform: translateX(14px); }
+.listo .entra { animation: entrar .8s cubic-bezier(.2, .7, .2, 1) forwards; animation-delay: var(--d, 0s); }
+@keyframes entrar { to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .entra { opacity: 1 !important; transform: none !important; animation: none !important; }
+  .listo .retrato-borde, .listo .boton-whatsapp::after { animation: none; }
+}
